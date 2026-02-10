@@ -192,7 +192,7 @@ const ContactSection = () => {
             <div className="h-64 bg-surface-muted rounded-xl overflow-hidden shadow-soft border border-border/50">
               <iframe
                 title="Maa Bakery Location"
-                src="https://www.google.co.in/maps/place/Maa+Bakery/@20.1427957,86.0474666,16z/data=!4m6!3m5!1s0x3a199bd254d7b8e3:0x10a78f1bd0e6184d!8m2!3d20.1440951!4d86.0500093!16s%2Fg%2F11j7vhg22w?entry=ttu&g_ep=EgoyMDI2MDIwNC4wIKXMDSoASAFQAw%3D%3D"
+                src="https://maps.google.com/maps?q=Maa%20Bakery%20Nuagaon%20Niali%20Odisha%20754004&t=&z=15&ie=UTF8&iwloc=&output=embed"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
