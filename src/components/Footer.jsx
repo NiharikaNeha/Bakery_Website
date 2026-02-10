@@ -35,7 +35,7 @@ const Footer = () => {
             </h3>
             <p className="text-text-secondary font-body mb-4">
               Crafting delicious memories since 2014. Premium artisan baked
-              goods made with love.
+              goods made with love. Daily fresh appetising items.
             </p>
           </div>
 
@@ -66,7 +66,7 @@ const Footer = () => {
             <ul className="space-y-3">
               <li className="flex items-center space-x-2 text-text-secondary font-body">
                 <Phone className="w-4 h-4 text-primary" />
-                <span>+1 (555) 123-4567</span>
+                <span>+91 80183 06265</span>
               </li>
               <li className="flex items-center space-x-2 text-text-secondary font-body">
                 <Mail className="w-4 h-4 text-primary" />
@@ -74,7 +74,7 @@ const Footer = () => {
               </li>
               <li className="flex items-center space-x-2 text-text-secondary font-body">
                 <MapPin className="w-4 h-4 text-primary" />
-                <span>123 Baker Street</span>
+                <span>Nuagaon, Niali, Khulisa, Odisha 754004</span>
               </li>
             </ul>
           </div>
