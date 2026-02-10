@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, ShoppingCart } from 'lucide-react';
+import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { Link, useLocation } from "react-router-dom";
+import { Menu, X, ShoppingCart } from "lucide-react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,15 +12,15 @@ const Navbar = () => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const navItems = [
-    { name: 'Home', href: '/', isRoute: true },
-    { name: 'Products', href: '/products', isRoute: true },
-    { name: 'About', href: '#about', isRoute: false },
-    { name: 'Contact', href: '#contact', isRoute: false }
+    { name: "Home", href: "/", isRoute: true },
+    { name: "Products", href: "/products", isRoute: true },
+    { name: "About", href: "#about", isRoute: false },
+    { name: "Contact", href: "#contact", isRoute: false },
   ];
 
   return (
@@ -28,22 +28,22 @@ const Navbar = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled 
-          ? 'bg-white/95 backdrop-blur-md shadow-lg' 
-          : 'bg-white/80 backdrop-blur-sm'
+        scrolled
+          ? "bg-white/95 backdrop-blur-lg shadow-medium border-b border-border/50"
+          : "bg-white/90 backdrop-blur-md shadow-soft"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 2xl:px-0">
+        <div className="flex justify-between items-center h-16 sm:h-20">
           {/* Logo */}
-          <motion.div 
-            className="flex-shrink-0"
+          <motion.div
+            className="flex-shrink-0 flex items-center gap-2"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <Link to="/" className="block">
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-orange-600 to-pink-600 bg-clip-text text-transparent">
-                🧁 Sweet Bakery
+            <Link to="/" className="block flex items-center gap-2">
+              <h1 className="text-2xl font-heading font-bold bg-gradient-to-r from-primary to-primary-dark bg-clip-text text-transparent">
+                Sweet Bakery
               </h1>
             </Link>
           </motion.div>
@@ -60,8 +60,10 @@ const Navbar = () => {
                   {item.isRoute ? (
                     <Link
                       to={item.href}
-                      className={`text-gray-700 hover:text-orange-600 px-3 py-2 text-sm font-medium transition-colors duration-200 ${
-                        location.pathname === item.href ? 'text-orange-600 font-semibold' : ''
+                      className={`text-text-secondary hover:text-primary px-3 py-2 text-sm font-medium transition-colors duration-normal ${
+                        location.pathname === item.href
+                          ? "text-primary font-semibold"
+                          : ""
                       }`}
                     >
                       {item.name}
@@ -80,16 +82,21 @@ const Navbar = () => {
           </div>
 
           {/* Cart & Mobile menu button */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center">
+            {/* Cart Icon */}
             <motion.button
-              whileHover={{ scale: 1.1 }}
+              whileHover={{ scale: 1.1, y: -2 }}
               whileTap={{ scale: 0.9 }}
-              className="relative p-2 text-gray-700 hover:text-orange-600 transition-colors"
+              className="relative p-2.5 text-text-secondary hover:text-primary transition-all duration-300 hover:bg-secondary/30 rounded-full"
             >
               <ShoppingCart className="h-6 w-6" />
-              <span className="absolute -top-1 -right-1 bg-orange-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+              <motion.span
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                className="absolute -top-1 -right-1 bg-gradient-to-r from-accent to-primary text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold shadow-medium"
+              >
                 0
-              </span>
+              </motion.span>
             </motion.button>
 
             {/* Mobile menu button */}
@@ -97,9 +104,13 @@ const Navbar = () => {
               <motion.button
                 whileTap={{ scale: 0.9 }}
                 onClick={() => setIsOpen(!isOpen)}
-                className="p-2 text-gray-700 hover:text-orange-600 transition-colors"
+                className="p-2 text-text-secondary hover:text-primary transition-colors duration-normal"
               >
-                {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+                {isOpen ? (
+                  <X className="h-6 w-6" />
+                ) : (
+                  <Menu className="h-6 w-6" />
+                )}
               </motion.button>
             </div>
           </div>
@@ -108,24 +119,23 @@ const Navbar = () => {
         {/* Mobile Navigation */}
         <motion.div
           initial={{ opacity: 0, height: 0 }}
-          animate={{ 
-            opacity: isOpen ? 1 : 0, 
-            height: isOpen ? 'auto' : 0 
+          animate={{
+            opacity: isOpen ? 1 : 0,
+            height: isOpen ? "auto" : 0,
           }}
           className="md:hidden overflow-hidden"
         >
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+          <div className="px-4 pt-4 pb-8 space-y-3 bg-white/98 backdrop-blur-xl border-t border-border/20">
             {navItems.map((item) => (
-              <motion.div
-                key={item.name}
-                whileHover={{ x: 10 }}
-              >
+              <motion.div key={item.name} whileHover={{ x: 10 }}>
                 {item.isRoute ? (
                   <Link
                     to={item.href}
                     onClick={() => setIsOpen(false)}
-                    className={`text-gray-700 hover:text-orange-600 block px-3 py-2 text-base font-medium transition-colors ${
-                      location.pathname === item.href ? 'text-orange-600 font-semibold' : ''
+                    className={`text-text-secondary hover:text-primary block px-4 py-3 text-lg font-medium transition-colors duration-normal rounded-xl hover:bg-secondary/20 ${
+                      location.pathname === item.href
+                        ? "text-primary font-semibold bg-secondary/30"
+                        : ""
                     }`}
                   >
                     {item.name}
@@ -134,7 +144,7 @@ const Navbar = () => {
                   <a
                     href={item.href}
                     onClick={() => setIsOpen(false)}
-                    className="text-gray-700 hover:text-orange-600 block px-3 py-2 text-base font-medium transition-colors"
+                    className="text-text-secondary hover:text-primary block px-4 py-3 text-lg font-medium transition-colors duration-normal rounded-xl hover:bg-secondary/20"
                   >
                     {item.name}
                   </a>

@@ -1,166 +1,102 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { categories, products } from '../data/products';
+import React from "react";
+import { motion } from "framer-motion";
+import { ArrowRight, Package } from "lucide-react";
 
-const CategoryShowcase = () => {
-  const getCategoryStats = (categoryId) => {
-    if (categoryId === 'all') {
-      return {
-        count: products.length,
-        avgPrice: (products.reduce((sum, p) => sum + p.price, 0) / products.length).toFixed(2)
-      };
-    }
-    
-    const categoryProducts = products.filter(p => p.category === categoryId);
-    const avgPrice = categoryProducts.length > 0 
-      ? (categoryProducts.reduce((sum, p) => sum + p.price, 0) / categoryProducts.length).toFixed(2)
-      : '0.00';
-    
-    return {
-      count: categoryProducts.length,
-      avgPrice: avgPrice
-    };
+const CategoryShowcase = ({ categories, products }) => {
+  const getCategoryProducts = (category) => {
+    return products.filter((p) => p.category === category).slice(0, 3);
   };
 
+  const popularCategories = categories.slice(1, 4); // Skip 'all'
+
   return (
-    <section className="py-16 bg-white">
+    <section className="py-16 bg-surface-muted">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
+        {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
-            Browse by <span className="bg-gradient-to-r from-orange-600 to-pink-600 bg-clip-text text-transparent">Category</span>
+          <h2 className="text-3xl md:text-4xl font-heading font-bold text-text-primary mb-4">
+            Popular <span className="text-primary">Categories</span>
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Explore our wide range of bakery products organized by category
+          <p className="text-lg text-text-secondary font-body">
+            Explore our most loved collections
           </p>
         </motion.div>
 
         {/* Categories Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-          {categories.slice(1).map((category, index) => {
-            const stats = getCategoryStats(category.id);
-            
+        <div className="grid md:grid-cols-3 gap-8">
+          {popularCategories.map((category, index) => {
+            const categoryProducts = getCategoryProducts(category);
+            const productCount = products.filter(
+              (p) => p.category === category,
+            ).length;
+
             return (
               <motion.div
-                key={category.id}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
+                key={category}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.05 }}
-                whileHover={{ scale: 1.05, y: -5 }}
-                className="group cursor-pointer"
+                transition={{ delay: index * 0.1 }}
+                className="bg-surface rounded-2xl overflow-hidden shadow-soft hover:shadow-medium transition-all duration-normal"
               >
-                <div className={`bg-gradient-to-br ${category.color} p-6 rounded-2xl text-white text-center shadow-lg hover:shadow-xl transition-all duration-300`}>
-                  {/* Icon */}
-                  <motion.div
-                    whileHover={{ rotate: 10, scale: 1.1 }}
-                    className="text-4xl mb-3 mx-auto"
-                  >
-                    {category.icon}
-                  </motion.div>
-                  
-                  {/* Name */}
-                  <h3 className="font-semibold text-lg mb-2 group-hover:scale-105 transition-transform">
-                    {category.name}
-                  </h3>
-                  
-                  {/* Stats */}
-                  <div className="text-sm opacity-90 space-y-1">
-                    <div>{stats.count} items</div>
-                    {stats.avgPrice !== '0.00' && (
-                      <div>From ${stats.avgPrice}</div>
-                    )}
+                {/* Category Header */}
+                <div className="p-6 bg-gradient-to-br from-secondary to-surface-muted">
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="text-2xl font-heading font-bold text-text-primary capitalize">
+                      {category}
+                    </h3>
+                    <Package className="w-6 h-6 text-primary" />
                   </div>
-                  
-                  {/* Hover Effect */}
-                  <div className="absolute inset-0 bg-white/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <p className="text-text-muted font-body">
+                    {productCount} products available
+                  </p>
+                </div>
+
+                {/* Product Preview */}
+                <div className="p-6">
+                  <div className="space-y-3 mb-4">
+                    {categoryProducts.map((product) => (
+                      <div
+                        key={product.id}
+                        className="flex items-center space-x-3 p-2 rounded-lg hover:bg-surface-muted transition-colors duration-normal"
+                      >
+                        <div className="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0">
+                          <img
+                            src={product.image}
+                            alt={product.name}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-semibold text-text-primary truncate font-heading">
+                            {product.name}
+                          </p>
+                          <p className="text-sm text-primary font-body">
+                            ${product.price}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="w-full flex items-center justify-center space-x-2 bg-primary text-white py-2 rounded-lg font-semibold hover:bg-primary-dark transition-colors duration-normal font-body"
+                  >
+                    <span>View All</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </motion.button>
                 </div>
               </motion.div>
             );
           })}
         </div>
-
-        {/* Featured Categories */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.3 }}
-          className="mt-16"
-        >
-          <h3 className="text-2xl font-bold text-gray-800 mb-8 text-center">
-            Popular Categories
-          </h3>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {categories.slice(1, 4).map((category, index) => {
-              const categoryProducts = products.filter(p => p.category === category.id);
-              const featuredProducts = categoryProducts.slice(0, 3);
-              
-              return (
-                <motion.div
-                  key={category.id}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.4 + index * 0.1 }}
-                  className="bg-gray-50 rounded-2xl p-6"
-                >
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center space-x-3">
-                      <div className={`bg-gradient-to-r ${category.color} p-3 rounded-xl text-white text-2xl`}>
-                        {category.icon}
-                      </div>
-                      <h4 className="text-lg font-semibold text-gray-800">
-                        {category.name}
-                      </h4>
-                    </div>
-                    <span className="bg-orange-100 text-orange-800 px-2 py-1 rounded-full text-sm font-semibold">
-                      {categoryProducts.length}
-                    </span>
-                  </div>
-                  
-                  {/* Featured Products */}
-                  <div className="space-y-3">
-                    {featuredProducts.map((product) => (
-                      <motion.div
-                        key={product.id}
-                        whileHover={{ x: 5 }}
-                        className="flex items-center space-x-3 p-2 bg-white rounded-lg"
-                      >
-                        <img
-                          src={product.image}
-                          alt={product.name}
-                          className="w-12 h-12 object-cover rounded-lg"
-                        />
-                        <div className="flex-1">
-                          <p className="text-sm font-medium text-gray-800 line-clamp-1">
-                            {product.name}
-                          </p>
-                          <p className="text-xs text-gray-600">${product.price}</p>
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
-                  
-                  {/* View All Button */}
-                  <motion.button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className={`w-full mt-4 bg-gradient-to-r ${category.color} text-white py-2 rounded-lg font-medium hover:shadow-lg transition-all duration-300`}
-                  >
-                    View All {category.name}
-                  </motion.button>
-                </motion.div>
-              );
-            })}
-          </div>
-        </motion.div>
       </div>
     </section>
   );

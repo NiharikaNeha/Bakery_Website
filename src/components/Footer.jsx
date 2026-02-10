@@ -1,156 +1,111 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { Facebook, Instagram, Twitter, Mail, Phone, MapPin } from 'lucide-react';
+import React from "react";
+import { motion } from "framer-motion";
+import {
+  Facebook,
+  Instagram,
+  Twitter,
+  Mail,
+  Phone,
+  MapPin,
+} from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
-  const socialLinks = [
-    { icon: Facebook, href: '#', label: 'Facebook' },
-    { icon: Instagram, href: '#', label: 'Instagram' },
-    { icon: Twitter, href: '#', label: 'Twitter' }
+  const quickLinks = [
+    { name: "Home", path: "/" },
+    { name: "Products", path: "/products" },
+    { name: "About Us", path: "/#about" },
+    { name: "Contact", path: "/#contact" },
   ];
 
-  const footerLinks = [
-    {
-      title: 'Quick Links',
-      links: [
-        { name: 'Home', href: '/', isRoute: true },
-        { name: 'Products', href: '/products', isRoute: true },
-        { name: 'About Us', href: '#about', isRoute: false },
-        { name: 'Contact', href: '#contact', isRoute: false }
-      ]
-    },
-    {
-      title: 'Products',
-      links: [
-        { name: 'All Products', href: '/products', isRoute: true },
-        { name: 'Cakes', href: '/products', isRoute: true },
-        { name: 'Pastries', href: '/products', isRoute: true },
-        { name: 'Breads', href: '/products', isRoute: true },
-        { name: 'Chocolates', href: '/products', isRoute: true }
-      ]
-    }
+  const socialLinks = [
+    { icon: Facebook, href: "#", label: "Facebook" },
+    { icon: Instagram, href: "#", label: "Instagram" },
+    { icon: Twitter, href: "#", label: "Twitter" },
   ];
 
   return (
-    <footer className="bg-gradient-to-br from-orange-50 to-pink-50 pt-16 pb-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+    <footer className="bg-surface-muted border-t border-border">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* Brand */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="col-span-1 md:col-span-2"
-          >
-            <h3 className="text-2xl font-bold bg-gradient-to-r from-orange-600 to-pink-600 bg-clip-text text-transparent mb-4">
-              🧁 Sweet Bakery
+          <div>
+            <h3 className="text-2xl font-heading font-bold text-primary mb-4">
+              Sweet Bakery
             </h3>
-            <p className="text-gray-600 mb-6 max-w-md">
-              Freshly baked goods made with love and the finest ingredients. 
-              Bringing sweetness to your day since 2020.
+            <p className="text-text-secondary font-body mb-4">
+              Crafting delicious memories since 2014. Premium artisan baked
+              goods made with love.
             </p>
-            
-            {/* Contact Info */}
-            <div className="space-y-3">
-              <motion.div 
-                className="flex items-center text-gray-600"
-                whileHover={{ x: 5 }}
-              >
-                <Phone className="h-5 w-5 mr-3 text-orange-600" />
-                <span>+1 (555) 123-4567</span>
-              </motion.div>
-              <motion.div 
-                className="flex items-center text-gray-600"
-                whileHover={{ x: 5 }}
-              >
-                <Mail className="h-5 w-5 mr-3 text-orange-600" />
-                <span>hello@sweetbakery.com</span>
-              </motion.div>
-              <motion.div 
-                className="flex items-center text-gray-600"
-                whileHover={{ x: 5 }}
-              >
-                <MapPin className="h-5 w-5 mr-3 text-orange-600" />
-                <span>123 Bakery Lane, Sweet City, SC 12345</span>
-              </motion.div>
-            </div>
-          </motion.div>
+          </div>
 
-          {/* Footer Links */}
-          {footerLinks.map((section, index) => (
-            <motion.div
-              key={section.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-            >
-              <h4 className="text-lg font-semibold text-gray-800 mb-4">
-                {section.title}
-              </h4>
-              <ul className="space-y-2">
-                {section.links.map((link) => (
-                  <motion.li
-                    key={link.name}
-                    whileHover={{ x: 5 }}
+          {/* Quick Links */}
+          <div>
+            <h4 className="font-heading font-semibold text-text-primary mb-4">
+              Quick Links
+            </h4>
+            <ul className="space-y-2">
+              {quickLinks.map((link) => (
+                <li key={link.name}>
+                  <Link
+                    to={link.path}
+                    className="text-text-secondary hover:text-primary transition-colors duration-normal font-body"
                   >
-                    {link.isRoute ? (
-                      <Link
-                        to={link.href}
-                        className="text-gray-600 hover:text-orange-600 transition-colors duration-200"
-                      >
-                        {link.name}
-                      </Link>
-                    ) : (
-                      <a
-                        href={link.href}
-                        className="text-gray-600 hover:text-orange-600 transition-colors duration-200"
-                      >
-                        {link.name}
-                      </a>
-                    )}
-                  </motion.li>
-                ))}
-              </ul>
-            </motion.div>
-          ))}
-        </div>
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-        {/* Social Links & Copyright */}
-        <div className="mt-12 pt-8 border-t border-orange-200">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            {/* Social Links */}
-            <motion.div 
-              className="flex space-x-6 mb-4 md:mb-0"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
+          {/* Contact */}
+          <div>
+            <h4 className="font-heading font-semibold text-text-primary mb-4">
+              Contact Us
+            </h4>
+            <ul className="space-y-3">
+              <li className="flex items-center space-x-2 text-text-secondary font-body">
+                <Phone className="w-4 h-4 text-primary" />
+                <span>+1 (555) 123-4567</span>
+              </li>
+              <li className="flex items-center space-x-2 text-text-secondary font-body">
+                <Mail className="w-4 h-4 text-primary" />
+                <span>hello@sweetbakery.com</span>
+              </li>
+              <li className="flex items-center space-x-2 text-text-secondary font-body">
+                <MapPin className="w-4 h-4 text-primary" />
+                <span>123 Baker Street</span>
+              </li>
+            </ul>
+          </div>
+
+          {/* Social */}
+          <div>
+            <h4 className="font-heading font-semibold text-text-primary mb-4">
+              Follow Us
+            </h4>
+            <div className="flex space-x-4">
               {socialLinks.map((social) => (
                 <motion.a
                   key={social.label}
                   href={social.href}
-                  aria-label={social.label}
-                  whileHover={{ scale: 1.2, rotate: 5 }}
+                  whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
-                  className="text-gray-600 hover:text-orange-600 transition-colors duration-200"
+                  className="w-10 h-10 bg-secondary rounded-full flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all duration-normal"
+                  aria-label={social.label}
                 >
-                  <social.icon className="h-6 w-6" />
+                  <social.icon className="w-5 h-5" />
                 </motion.a>
               ))}
-            </motion.div>
-
-            {/* Copyright */}
-            <motion.p
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              className="text-gray-600 text-sm"
-            >
-              © 2024 Sweet Bakery. All rights reserved. Made with ❤️
-            </motion.p>
+            </div>
           </div>
+        </div>
+
+        {/* Copyright */}
+        <div className="border-t border-border pt-8 text-center">
+          <p className="text-text-muted font-body">
+            © {new Date().getFullYear()} Sweet Bakery. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>

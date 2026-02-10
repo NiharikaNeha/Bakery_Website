@@ -1,7 +1,7 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import ProductCard from './ProductCard';
-import ProductModal from './ProductModal';
+import React from "react";
+import { motion } from "framer-motion";
+import ProductCard from "./ProductCard";
+import ProductModal from "./ProductModal";
 
 const EnhancedProductGrid = ({ products, activeCategory }) => {
   const [selectedProduct, setSelectedProduct] = React.useState(null);
@@ -19,11 +19,11 @@ const EnhancedProductGrid = ({ products, activeCategory }) => {
 
   // Group products by category for better organization
   const groupedProducts = React.useMemo(() => {
-    if (activeCategory === 'all') {
+    if (activeCategory === "all") {
       return products;
     }
-    
-    return products.filter(product => product.category === activeCategory);
+
+    return products.filter((product) => product.category === activeCategory);
   }, [products, activeCategory]);
 
   return (
@@ -52,16 +52,16 @@ const EnhancedProductGrid = ({ products, activeCategory }) => {
           className="text-center py-16"
         >
           <div className="text-6xl mb-4">🔍</div>
-          <h3 className="text-2xl font-bold text-gray-800 mb-2">
+          <h3 className="text-2xl font-bold text-text-primary mb-2 font-heading">
             No products found
           </h3>
-          <p className="text-gray-600 mb-6">
+          <p className="text-text-secondary mb-6 font-body">
             Try selecting a different category or adjusting your search
           </p>
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-gradient-to-r from-orange-500 to-pink-500 text-white px-6 py-3 rounded-full font-semibold"
+            className="bg-primary text-white px-6 py-3 rounded-full font-semibold shadow-medium hover:shadow-strong transition-all duration-normal"
             onClick={() => window.location.reload()}
           >
             Browse All Products
@@ -77,21 +77,22 @@ const EnhancedProductGrid = ({ products, activeCategory }) => {
       />
 
       {/* Load More Button */}
-      {groupedProducts.length > 8 && groupedProducts.length < products.length && (
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center"
-        >
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-gradient-to-r from-orange-500 to-pink-500 text-white px-8 py-4 rounded-full font-semibold text-lg shadow-xl hover:shadow-2xl transition-all duration-300"
+      {groupedProducts.length > 8 &&
+        groupedProducts.length < products.length && (
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-center"
           >
-            Load More Products
-          </motion.button>
-        </motion.div>
-      )}
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-primary text-white px-8 py-4 rounded-full font-semibold text-lg shadow-medium hover:shadow-strong transition-all duration-normal"
+            >
+              Load More Products
+            </motion.button>
+          </motion.div>
+        )}
 
       {/* Products Summary */}
       {groupedProducts.length > 0 && (
@@ -102,18 +103,26 @@ const EnhancedProductGrid = ({ products, activeCategory }) => {
           className="bg-gradient-to-r from-orange-50 to-pink-50 rounded-2xl p-6 mt-8"
         >
           <div className="flex flex-wrap justify-between items-center gap-4">
-            <div className="text-gray-700">
-              <span className="font-semibold text-lg">{groupedProducts.length}</span> products found
-              {activeCategory !== 'all' && (
-                <span className="ml-2">in <span className="font-semibold capitalize">{activeCategory}</span></span>
+            <div className="text-text-secondary font-body">
+              <span className="font-semibold text-lg text-primary">
+                {groupedProducts.length}
+              </span>{" "}
+              products found
+              {activeCategory !== "all" && (
+                <span className="ml-2">
+                  in{" "}
+                  <span className="font-semibold capitalize text-primary">
+                    {activeCategory}
+                  </span>
+                </span>
               )}
             </div>
-            
+
             <div className="flex items-center space-x-4">
-              <span className="text-gray-600">Sort by:</span>
+              <span className="text-text-muted font-body">Sort by:</span>
               <motion.select
                 whileHover={{ scale: 1.02 }}
-                className="bg-white border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                className="bg-surface border border-border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-accent text-text-primary"
               >
                 <option value="featured">Featured</option>
                 <option value="price-low">Price: Low to High</option>
