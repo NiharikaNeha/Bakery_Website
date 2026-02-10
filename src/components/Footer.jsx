@@ -14,9 +14,9 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   const quickLinks = [
     { name: "Home", path: "/" },
-    { name: "Menu", path: "/products" },
-    { name: "Order", path: "/products" },
-    { name: "Order History", path: "/products" },
+    { name: "Products", path: "/products" },
+    { name: "About" },
+    { name: "Contact"},
   ];
 
   const socialLinks = [
@@ -24,19 +24,19 @@ const Footer = () => {
       icon: Instagram,
       href: "#",
       label: "Instagram",
-      color: "bg-[#F56040]",
+      color: "bg-[#B86B3E]",
     },
     {
       icon: Facebook,
       href: "#",
       label: "Facebook",
-      color: "bg-[#1877F2]",
+      color: "bg-[#B86B3E]",
     },
     {
       icon: Twitter,
       href: "#",
       label: "Twitter",
-      color: "bg-[#1DA1F2]",
+      color: "bg-[#B86B3E]",
     },
   ];
 
