@@ -30,20 +30,20 @@ const ContactSection = () => {
     {
       icon: Phone,
       title: "Phone",
-      details: "+1 (555) 123-4567",
-      link: "tel:+15551234567",
+      details: "+91 80183 06265",
+      link: "tel:+918018306265",
     },
     {
       icon: Mail,
       title: "Email",
-      details: "hello@maabakery.com",
+      details: "[EMAIL_ADDRESS]",
       link: "mailto:hello@sweetbakery.com",
     },
     {
       icon: MapPin,
       title: "Location",
-      details: "123 Baker Street, Sweet City",
-      link: "#",
+      details: "Nuagaon, Niali, Khulisa, Odisha 754004",
+      link: "https://www.google.co.in/maps/place/Maa+Bakery/@20.1427957,86.0474666,16z/data=!4m6!3m5!1s0x3a199bd254d7b8e3:0x10a78f1bd0e6184d!8m2!3d20.1440951!4d86.0500093!16s%2Fg%2F11j7vhg22w?entry=ttu&g_ep=EgoyMDI2MDIwNC4wIKXMDSoASAFQAw%3D%3D",
     },
   ];
 
@@ -188,11 +188,19 @@ const ContactSection = () => {
               </motion.a>
             ))}
 
-            {/* Map Placeholder */}
-            <div className="h-64 bg-surface-muted rounded-xl overflow-hidden shadow-soft">
-              <div className="w-full h-full flex items-center justify-center text-text-muted">
-                <MapPin className="w-12 h-12" />
-              </div>
+            {/* Google Map Integration */}
+            <div className="h-64 bg-surface-muted rounded-xl overflow-hidden shadow-soft border border-border/50">
+              <iframe
+                title="Maa Bakery Location"
+                src="https://www.google.co.in/maps/place/Maa+Bakery/@20.1427957,86.0474666,16z/data=!4m6!3m5!1s0x3a199bd254d7b8e3:0x10a78f1bd0e6184d!8m2!3d20.1440951!4d86.0500093!16s%2Fg%2F11j7vhg22w?entry=ttu&g_ep=EgoyMDI2MDIwNC4wIKXMDSoASAFQAw%3D%3D"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="transition-all duration-700"
+              ></iframe>
             </div>
           </motion.div>
         </div>
