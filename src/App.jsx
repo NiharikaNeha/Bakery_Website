@@ -7,7 +7,7 @@ import AnimatedRoutes from "./components/AnimatedRoutes";
 const App = () => {
   return (
     <Router>
-      <div className="min-h-screen flex flex-col bg-background">
+      <div className="min-h-screen flex flex-col bg-background overflow-x-hidden">
         <Navbar />
         <main className="flex-grow">
           <AnimatedRoutes />
