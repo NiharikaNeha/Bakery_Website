@@ -31,7 +31,7 @@ const Footer = () => {
           {/* Brand */}
           <div>
             <h3 className="text-2xl font-heading font-bold text-primary mb-4">
-              Sweet Bakery
+              Maa Bakery
             </h3>
             <p className="text-text-secondary font-body mb-4">
               Crafting delicious memories since 2014. Premium artisan baked
@@ -70,7 +70,7 @@ const Footer = () => {
               </li>
               <li className="flex items-center space-x-2 text-text-secondary font-body">
                 <Mail className="w-4 h-4 text-primary" />
-                <span>hello@sweetbakery.com</span>
+                <span>hello@maabakery.com</span>
               </li>
               <li className="flex items-center space-x-2 text-text-secondary font-body">
                 <MapPin className="w-4 h-4 text-primary" />
@@ -104,7 +104,7 @@ const Footer = () => {
         {/* Copyright */}
         <div className="border-t border-border pt-8 text-center">
           <p className="text-text-muted font-body">
-            © {new Date().getFullYear()} Sweet Bakery. All rights reserved.
+            © {new Date().getFullYear()} Maa Bakery. All rights reserved.
           </p>
         </div>
       </div>

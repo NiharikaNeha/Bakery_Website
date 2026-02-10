@@ -43,7 +43,7 @@ const Navbar = () => {
           >
             <Link to="/" className="block flex items-center gap-2">
               <h1 className="text-2xl font-heading font-bold bg-gradient-to-r from-primary to-primary-dark bg-clip-text text-transparent">
-                Sweet Bakery
+                Maa Bakery
               </h1>
             </Link>
           </motion.div>

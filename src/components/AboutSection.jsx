@@ -49,10 +49,10 @@ const AboutSection = () => {
               Since 2014
             </h2>
             <p className="text-lg text-text-secondary mb-8 font-body leading-relaxed">
-              At Sweet Bakery, we believe that every cake, pastry, and bread
-              tells a story. Our artisan bakers combine traditional techniques
-              with innovative flavors to create unforgettable experiences for
-              your special moments.
+              At Maa Bakery, we believe that every cake, pastry, and bread tells
+              a story. Our artisan bakers combine traditional techniques with
+              innovative flavors to create unforgettable experiences for your
+              special moments.
             </p>
 
             {/* Features Grid */}

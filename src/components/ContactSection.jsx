@@ -36,7 +36,7 @@ const ContactSection = () => {
     {
       icon: Mail,
       title: "Email",
-      details: "hello@sweetbakery.com",
+      details: "hello@maabakery.com",
       link: "mailto:hello@sweetbakery.com",
     },
     {

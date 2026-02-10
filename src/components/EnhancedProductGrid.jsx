@@ -1,9 +1,9 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import ProductCard from "./ProductCard";
 import ProductModal from "./ProductModal";
 
-const EnhancedProductGrid = ({ products, activeCategory }) => {
+const EnhancedProductGrid = ({ products, activeCategory, searchTerm }) => {
   const [selectedProduct, setSelectedProduct] = React.useState(null);
   const [isModalOpen, setIsModalOpen] = React.useState(false);
 
@@ -17,54 +17,62 @@ const EnhancedProductGrid = ({ products, activeCategory }) => {
     setSelectedProduct(null);
   };
 
-  // Group products by category for better organization
-  const groupedProducts = React.useMemo(() => {
-    if (activeCategory === "all") {
-      return products;
-    }
-
-    return products.filter((product) => product.category === activeCategory);
-  }, [products, activeCategory]);
+  // Advanced filtering logic
+  const filteredProducts = React.useMemo(() => {
+    return products.filter((product) => {
+      const matchesCategory =
+        activeCategory === "all" || product.category === activeCategory;
+      const matchesSearch =
+        product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        product.description.toLowerCase().includes(searchTerm.toLowerCase());
+      return matchesCategory && matchesSearch;
+    });
+  }, [products, activeCategory, searchTerm]);
 
   return (
     <div className="space-y-8">
       {/* Products Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {groupedProducts.map((product, index) => (
-          <motion.div
-            key={product.id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.05 }}
-            onClick={() => handleProductClick(product)}
-            className="cursor-pointer"
-          >
-            <ProductCard product={product} index={index} />
-          </motion.div>
-        ))}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
+        <AnimatePresence mode="popLayout">
+          {filteredProducts.map((product, index) => (
+            <motion.div
+              key={product.id}
+              layout
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.3 }}
+              onClick={() => handleProductClick(product)}
+              className="cursor-pointer"
+            >
+              <ProductCard product={product} index={index % 8} />
+            </motion.div>
+          ))}
+        </AnimatePresence>
       </div>
 
       {/* No Products Found */}
-      {groupedProducts.length === 0 && (
+      {filteredProducts.length === 0 && (
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="text-center py-16"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-center py-24 bg-white/50 backdrop-blur-sm rounded-3xl border-2 border-dashed border-border/50"
         >
-          <div className="text-6xl mb-4">🔍</div>
-          <h3 className="text-2xl font-bold text-text-primary mb-2 font-heading">
-            No products found
+          <div className="text-7xl mb-6">🍰</div>
+          <h3 className="text-3xl font-bold text-text-primary mb-3 font-heading">
+            No treats found
           </h3>
-          <p className="text-text-secondary mb-6 font-body">
-            Try selecting a different category or adjusting your search
+          <p className="text-text-secondary mb-8 font-body max-w-md mx-auto">
+            We couldn't find any products matching your current search or
+            category filter.
           </p>
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-primary text-white px-6 py-3 rounded-full font-semibold shadow-medium hover:shadow-strong transition-all duration-normal"
+            className="bg-primary text-white px-8 py-3 rounded-full font-bold shadow-medium hover:shadow-strong transition-all duration-300"
             onClick={() => window.location.reload()}
           >
-            Browse All Products
+            Clear All Filters
           </motion.button>
         </motion.div>
       )}
@@ -76,59 +84,45 @@ const EnhancedProductGrid = ({ products, activeCategory }) => {
         onClose={handleCloseModal}
       />
 
-      {/* Load More Button */}
-      {groupedProducts.length > 8 &&
-        groupedProducts.length < products.length && (
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-center"
-          >
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-primary text-white px-8 py-4 rounded-full font-semibold text-lg shadow-medium hover:shadow-strong transition-all duration-normal"
-            >
-              Load More Products
-            </motion.button>
-          </motion.div>
-        )}
-
       {/* Products Summary */}
-      {groupedProducts.length > 0 && (
+      {filteredProducts.length > 0 && (
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className="bg-gradient-to-r from-orange-50 to-pink-50 rounded-2xl p-6 mt-8"
+          transition={{ delay: 0.2 }}
+          className="bg-gradient-to-r from-secondary/50 via-surface to-secondary/50 rounded-2xl p-6 mt-12 border border-border/50 shadow-soft"
         >
-          <div className="flex flex-wrap justify-between items-center gap-4">
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-6">
             <div className="text-text-secondary font-body">
-              <span className="font-semibold text-lg text-primary">
-                {groupedProducts.length}
+              Showing{" "}
+              <span className="font-bold text-xl text-primary">
+                {filteredProducts.length}
               </span>{" "}
-              products found
+              delicious products
               {activeCategory !== "all" && (
                 <span className="ml-2">
                   in{" "}
-                  <span className="font-semibold capitalize text-primary">
+                  <span className="font-bold capitalize text-primary">
                     {activeCategory}
                   </span>
                 </span>
               )}
             </div>
 
-            <div className="flex items-center space-x-4">
-              <span className="text-text-muted font-body">Sort by:</span>
+            <div className="flex items-center space-x-4 w-full sm:w-auto">
+              <span className="text-text-muted font-body font-medium shrink-0">
+                Sort by:
+              </span>
               <motion.select
                 whileHover={{ scale: 1.02 }}
-                className="bg-surface border border-border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-accent text-text-primary"
+                whileTap={{ scale: 0.98 }}
+                className="w-full sm:w-48 bg-white border border-border rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary/50 text-text-primary font-body shadow-sm"
               >
-                <option value="featured">Featured</option>
-                <option value="price-low">Price: Low to High</option>
-                <option value="price-high">Price: High to Low</option>
-                <option value="rating">Highest Rated</option>
-                <option value="name">Name: A to Z</option>
+                <option value="featured">✨ Featured</option>
+                <option value="price-low">💰 Price: Low to High</option>
+                <option value="price-high">💎 Price: High to Low</option>
+                <option value="rating">⭐️ Highest Rated</option>
+                <option value="name">🔤 Name: A to Z</option>
               </motion.select>
             </div>
           </div>
