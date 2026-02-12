@@ -68,7 +68,7 @@ const ProductCard = ({ product, index }) => {
             {product.name}
           </h3>
           <span className="text-xl font-bold text-primary">
-            ${product.price}
+            ₹{product.price}
           </span>
         </div>
 

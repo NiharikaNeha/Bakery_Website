@@ -2,6 +2,20 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Search, Grid, List, SlidersHorizontal } from "lucide-react";
 
+const categoryIcons = {
+  all: "✨",
+  pizza: "🍕",
+  burger: "🍔",
+  roll: "🌯",
+  patties: "🥟",
+  sandwich: "🥪",
+  croissant: "🥐",
+  pastry: "🍰",
+  tart: "🥧",
+  dessert: "🍮",
+  drinks: "🥤",
+};
+
 const CategoryFilter = ({
   categories,
   activeCategory,
@@ -12,9 +26,10 @@ const CategoryFilter = ({
   const [viewMode, setViewMode] = useState("grid");
   const [showAllCategories, setShowAllCategories] = useState(false);
 
+  const allCategories = ["all", ...categories];
   const displayedCategories = showAllCategories
-    ? categories
-    : categories.slice(0, 8);
+    ? allCategories
+    : allCategories.slice(0, 9); // "all" + first 8
 
   return (
     <div className="bg-surface rounded-2xl shadow-soft p-6 mb-8 border border-border/50">
@@ -48,18 +63,18 @@ const CategoryFilter = ({
         <div className="flex flex-wrap gap-2.5">
           {displayedCategories.map((category) => (
             <motion.button
-              key={category.id}
+              key={category}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              onClick={() => onCategoryChange(category.id)}
-              className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 font-body flex items-center gap-2 ${
-                activeCategory === category.id
+              onClick={() => onCategoryChange(category)}
+              className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 font-body flex items-center gap-2 capitalize ${
+                activeCategory === category
                   ? "bg-primary text-white shadow-medium scale-105"
                   : "bg-secondary text-text-primary hover:bg-primary-light hover:text-white"
               }`}
             >
-              <span>{category.icon}</span>
-              <span>{category.name}</span>
+              <span>{categoryIcons[category] || "🍰"}</span>
+              <span>{category}</span>
             </motion.button>
           ))}
         </div>
