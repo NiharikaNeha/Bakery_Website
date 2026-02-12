@@ -1,23 +1,25 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ShoppingCart, Heart, Star, Plus, Minus } from "lucide-react";
+import {
+  X,
+  ShoppingCart,
+  Star,
+  Plus,
+  Minus,
+  Info,
+  Leaf,
+  Drumstick,
+} from "lucide-react";
 
 const ProductModal = ({ product, isOpen, onClose }) => {
   const [quantity, setQuantity] = useState(1);
   const [selectedSize, setSelectedSize] = useState(product?.size || "Standard");
 
-  if (!isOpen) return null;
+  if (!isOpen || !product) return null;
 
-  const renderStars = (rating) => {
-    return Array.from({ length: 5 }, (_, i) => (
-      <Star
-        key={i}
-        className={`h-5 w-5 ${
-          i < Math.floor(rating) ? "text-accent fill-current" : "text-border"
-        }`}
-      />
-    ));
-  };
+  const isVeg =
+    !product.name.toLowerCase().includes("chicken") &&
+    !product.name.toLowerCase().includes("egg");
 
   const handleQuantityChange = (type) => {
     if (type === "increase") {
@@ -27,199 +29,128 @@ const ProductModal = ({ product, isOpen, onClose }) => {
     }
   };
 
-  const totalPrice = (product.price * quantity).toFixed(2);
+  const totalPrice = product.price * quantity;
 
   return (
     <AnimatePresence>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm"
-        onClick={onClose}
-      >
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md">
         <motion.div
-          initial={{ scale: 0.9, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          exit={{ scale: 0.9, opacity: 0 }}
-          transition={{ type: "spring", duration: 0.3 }}
-          className="bg-surface rounded-3xl shadow-strong max-w-4xl w-full max-h-[90vh] overflow-hidden"
+          initial={{ opacity: 0, scale: 0.9, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.9, y: 20 }}
+          className="bg-white rounded-[2.5rem] shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden relative border border-white/20"
           onClick={(e) => e.stopPropagation()}
         >
-          {/* Header */}
-          <div className="relative p-6 border-b border-border">
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              onClick={onClose}
-              className="absolute top-6 right-6 p-2 bg-surface-muted rounded-full hover:bg-secondary transition-colors"
-            >
-              <X className="h-5 w-5 text-text-secondary" />
-            </motion.button>
+          {/* Close Button */}
+          <button
+            onClick={onClose}
+            className="absolute top-6 right-6 z-20 p-3 bg-white/80 backdrop-blur-sm rounded-full shadow-lg hover:bg-orange-50 transition-all text-neutral-800 hover:text-orange-600 border border-neutral-100"
+          >
+            <X className="h-5 w-5" />
+          </button>
 
-            <div className="flex items-center space-x-4">
-              <div className="text-4xl">
-                {product.category === "cakes"
-                  ? "🎂"
-                  : product.category === "colddrinks"
-                    ? "🥤"
-                    : "🍽️"}
-              </div>
-              <div>
-                <h2 className="text-2xl font-bold text-text-primary font-heading">
-                  {product.name}
-                </h2>
-                <div className="flex items-center space-x-2 mt-1">
-                  <div className="flex">{renderStars(product.rating)}</div>
-                  <span className="text-text-muted">({product.rating})</span>
-                  {product.badge && (
-                    <span className="bg-accent text-white px-2 py-1 rounded-full text-xs font-semibold font-body">
-                      {product.badge}
-                    </span>
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Content */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-6">
-            {/* Image */}
-            <div className="relative">
-              <motion.img
+          <div className="flex flex-col md:flex-row h-full">
+            {/* Image Section */}
+            <div className="md:w-1/2 relative h-64 md:h-auto overflow-hidden">
+              <img
                 src={product.image}
                 alt={product.name}
-                className="w-full h-80 object-cover rounded-2xl"
-                initial={{ scale: 0.8 }}
-                animate={{ scale: 1 }}
-                transition={{ duration: 0.3 }}
+                className="w-full h-full object-cover"
               />
-              {product.isCold && (
-                <div className="absolute top-4 left-4 bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-semibold flex items-center space-x-1">
-                  <span>❄️</span>
-                  <span>Cold</span>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+
+              {/* Badges */}
+              <div className="absolute top-6 left-6 flex gap-3">
+                <div
+                  className={`px-4 py-1.5 rounded-xl text-xs font-black uppercase tracking-widest border backdrop-blur-md shadow-lg ${
+                    isVeg
+                      ? "bg-green-500/90 text-white border-green-400"
+                      : "bg-red-500/90 text-white border-red-400"
+                  }`}
+                >
+                  <div className="flex items-center gap-2">
+                    {isVeg ? (
+                      <Leaf className="w-3.5 h-3.5" />
+                    ) : (
+                      <Drumstick className="w-3.5 h-3.5" />
+                    )}
+                    {isVeg ? "Veg" : "Non-Veg"}
+                  </div>
                 </div>
-              )}
+              </div>
             </div>
 
-            {/* Details */}
-            <div className="space-y-6">
-              {/* Description */}
-              <div>
-                <h3 className="text-lg font-semibold text-text-primary mb-2 font-heading">
-                  Description
-                </h3>
-                <p className="text-text-secondary font-body">
-                  {product.description}
-                </p>
-              </div>
+            {/* Details Section */}
+            <div className="md:w-1/2 p-8 md:p-12 overflow-y-auto space-y-8 flex flex-col justify-between">
+              <div className="space-y-6">
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2 text-orange-600">
+                    <Star className="w-4 h-4 fill-current" />
+                    <span className="text-sm font-black tracking-widest uppercase">
+                      {product.rating} Rating
+                    </span>
+                  </div>
+                  <h2 className="text-3xl md:text-4xl font-black italic text-neutral-800 tracking-tighter leading-tight">
+                    {product.name}
+                  </h2>
+                </div>
 
-              {/* Ingredients */}
-              {product.ingredients && (
-                <div>
-                  <h3 className="text-lg font-semibold text-text-primary mb-2 font-heading">
-                    Ingredients
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
-                    {product.ingredients.map((ingredient, index) => (
-                      <span
-                        key={index}
-                        className="bg-secondary text-primary px-3 py-1 rounded-full text-sm font-body"
+                <div className="flex items-start gap-3 p-4 bg-neutral-50 rounded-2xl border border-neutral-100">
+                  <Info className="w-5 h-5 text-orange-500 shrink-0 mt-0.5" />
+                  <p className="text-neutral-600 text-sm font-medium leading-relaxed italic">
+                    {product.description ||
+                      "Indulge in our masterfully crafted treats, made fresh with premium ingredients for the ultimate taste fantasy."}
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-1">
+                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-neutral-400">
+                      Total Price
+                    </span>
+                    <div className="text-3xl font-black text-neutral-900 tracking-tighter">
+                      ₹{totalPrice}
+                    </div>
+                  </div>
+                  <div className="space-y-1 text-right">
+                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-neutral-400">
+                      Quantity
+                    </span>
+                    <div className="flex items-center justify-end gap-4">
+                      <button
+                        onClick={() => handleQuantityChange("decrease")}
+                        className="w-10 h-10 rounded-full border border-neutral-200 flex items-center justify-center hover:bg-neutral-100 transition-colors"
                       >
-                        {ingredient}
+                        <Minus className="w-4 h-4" />
+                      </button>
+                      <span className="text-xl font-black w-6 text-center">
+                        {quantity}
                       </span>
-                    ))}
+                      <button
+                        onClick={() => handleQuantityChange("increase")}
+                        className="w-10 h-10 rounded-full bg-neutral-900 text-white flex items-center justify-center hover:bg-neutral-800 transition-colors"
+                      >
+                        <Plus className="w-4 h-4" />
+                      </button>
+                    </div>
                   </div>
-                </div>
-              )}
-
-              {/* Product Info */}
-              <div className="grid grid-cols-2 gap-4">
-                {product.size && (
-                  <div className="bg-surface-muted p-3 rounded-lg">
-                    <span className="text-text-muted text-sm font-body">
-                      Size
-                    </span>
-                    <p className="font-semibold text-text-primary font-heading">
-                      {product.size}
-                    </p>
-                  </div>
-                )}
-                {product.weight && (
-                  <div className="bg-surface-muted p-3 rounded-lg">
-                    <span className="text-text-muted text-sm font-body">
-                      Weight
-                    </span>
-                    <p className="font-semibold text-text-primary font-heading">
-                      {product.weight}
-                    </p>
-                  </div>
-                )}
-              </div>
-
-              {/* Quantity Selector */}
-              <div>
-                <h3 className="text-lg font-semibold text-text-primary mb-2 font-heading">
-                  Quantity
-                </h3>
-                <div className="flex items-center space-x-4">
-                  <motion.button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    onClick={() => handleQuantityChange("decrease")}
-                    className="p-2 bg-surface-muted rounded-full hover:bg-secondary transition-colors"
-                  >
-                    <Minus className="h-4 w-4 text-text-secondary" />
-                  </motion.button>
-                  <span className="text-xl font-semibold text-text-primary w-12 text-center">
-                    {quantity}
-                  </span>
-                  <motion.button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    onClick={() => handleQuantityChange("increase")}
-                    className="p-2 bg-surface-muted rounded-full hover:bg-secondary transition-colors"
-                  >
-                    <Plus className="h-4 w-4 text-text-secondary" />
-                  </motion.button>
                 </div>
               </div>
 
-              {/* Price */}
-              <div className="bg-surface-muted p-4 rounded-xl">
-                <div className="flex justify-between items-center">
-                  <span className="text-text-secondary font-body">
-                    Total Price
-                  </span>
-                  <span className="text-2xl font-bold text-primary font-heading">
-                    ${totalPrice}
-                  </span>
-                </div>
-              </div>
-
-              {/* Action Buttons */}
-              <div className="flex space-x-4">
+              <div className="pt-6 border-t border-neutral-100">
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="flex-1 bg-primary text-white py-3 rounded-xl font-semibold shadow-medium hover:shadow-strong transition-all duration-normal flex items-center justify-center space-x-2 font-body"
+                  className="w-full bg-orange-600 hover:bg-orange-700 text-white py-5 rounded-2xl flex items-center justify-center gap-3 shadow-xl shadow-orange-100 transition-all font-black uppercase tracking-widest text-sm"
                 >
-                  <ShoppingCart className="h-5 w-5" />
-                  <span>Add to Cart</span>
-                </motion.button>
-
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="p-3 bg-surface-muted rounded-xl hover:bg-secondary transition-colors"
-                >
-                  <Heart className="h-5 w-5 text-text-secondary" />
+                  <ShoppingCart className="w-4 h-4" />
+                  Add to Cart Fantasy
                 </motion.button>
               </div>
             </div>
           </div>
         </motion.div>
-      </motion.div>
+      </div>
     </AnimatePresence>
   );
 };

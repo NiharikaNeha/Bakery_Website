@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, ShoppingCart } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -83,22 +83,6 @@ const Navbar = () => {
 
           {/* Cart & Mobile menu button */}
           <div className="flex items-center">
-            {/* Cart Icon */}
-            <motion.button
-              whileHover={{ scale: 1.1, y: -2 }}
-              whileTap={{ scale: 0.9 }}
-              className="relative p-2.5 text-text-secondary hover:text-primary transition-all duration-300 hover:bg-secondary/30 rounded-full"
-            >
-              <ShoppingCart className="h-6 w-6" />
-              <motion.span
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                className="absolute -top-1 -right-1 bg-gradient-to-r from-accent to-primary text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold shadow-medium"
-              >
-                0
-              </motion.span>
-            </motion.button>
-
             {/* Mobile menu button */}
             <div className="md:hidden">
               <motion.button

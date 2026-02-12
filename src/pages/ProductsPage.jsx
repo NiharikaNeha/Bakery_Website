@@ -3,11 +3,13 @@ import { motion } from "framer-motion";
 import { products, categories } from "../data/products";
 import CategoryFilter from "../components/CategoryFilter";
 import EnhancedProductGrid from "../components/EnhancedProductGrid";
+import VegToggle from "../components/VegToggle";
 import { Sparkles, ShoppingBag } from "lucide-react";
 
 const ProductsPage = () => {
   const [activeCategory, setActiveCategory] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
+  const [dietaryFilter, setDietaryFilter] = useState("all");
 
   const handleCategoryChange = (categoryId) => {
     setActiveCategory(categoryId);
@@ -59,14 +61,19 @@ const ProductsPage = () => {
 
       <main className="container mx-auto px-4 py-8 space-y-8">
         {/* Filter Section */}
-        <section className="bg-white p-4 sm:p-6 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.03)] border border-neutral-50">
-          <CategoryFilter
-            categories={categories}
-            activeCategory={activeCategory}
-            onCategoryChange={handleCategoryChange}
-            searchTerm={searchTerm}
-            onSearchChange={handleSearchChange}
-          />
+        <section className="bg-white p-4 sm:p-6 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.03)] border border-neutral-50 flex flex-col md:flex-row md:items-end justify-between gap-6">
+          <div className="flex-grow">
+            <CategoryFilter
+              categories={categories}
+              activeCategory={activeCategory}
+              onCategoryChange={handleCategoryChange}
+              searchTerm={searchTerm}
+              onSearchChange={handleSearchChange}
+            />
+          </div>
+          <div className="flex-shrink-0">
+            <VegToggle value={dietaryFilter} onChange={setDietaryFilter} />
+          </div>
         </section>
 
         {/* Product Grid */}
@@ -75,6 +82,7 @@ const ProductsPage = () => {
             products={products}
             activeCategory={activeCategory}
             searchTerm={searchTerm}
+            dietaryFilter={dietaryFilter}
           />
         </section>
       </main>
