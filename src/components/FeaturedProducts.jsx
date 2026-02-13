@@ -34,8 +34,8 @@ const FeaturedProducts = () => {
   ];
 
   const stats = [
-    { value: "500+", label: "Products" },
-    { value: "50K+", label: "Happy Customers" },
+    { value: "50+", label: "Products" },
+    { value: "500+", label: "Happy Customers" },
     { value: "4.9", label: "Average Rating" },
   ];
 
