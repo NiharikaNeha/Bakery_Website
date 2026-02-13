@@ -10,7 +10,7 @@ const FeaturedProducts = () => {
     {
       id: 1,
       name: "Chocolate Delight Cake",
-      price: "$45",
+      price: "₹45",
       image:
         "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&auto=format&fit=crop",
       rating: 4.9,
@@ -18,7 +18,7 @@ const FeaturedProducts = () => {
     {
       id: 2,
       name: "Strawberry Dream",
-      price: "$38",
+      price: "₹38",
       image:
         "https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=400&auto=format&fit=crop",
       rating: 4.8,
@@ -26,7 +26,7 @@ const FeaturedProducts = () => {
     {
       id: 3,
       name: "Vanilla Elegance",
-      price: "$42",
+      price: "₹42",
       image:
         "https://images.unsplash.com/photo-1588195538326-c5b1e5b80e0b?w=400&auto=format&fit=crop",
       rating: 5.0,
