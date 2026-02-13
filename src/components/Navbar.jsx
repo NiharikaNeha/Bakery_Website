@@ -19,6 +19,7 @@ const Navbar = () => {
   const navItems = [
     { name: "Home", href: "/", isRoute: true },
     { name: "Products", href: "/products", isRoute: true },
+    { name: "Gallery", href: "/gallery", isRoute: true },
     { name: "About", href: "#about", isRoute: false },
     { name: "Contact", href: "#contact", isRoute: false },
   ];

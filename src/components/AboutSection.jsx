@@ -94,7 +94,7 @@ const AboutSection = () => {
           >
             <div className="relative h-96 lg:h-[500px] rounded-xl overflow-hidden shadow-strong">
               <img
-                src="https://images.unsplash.com/photo-1517433670267-08bbd4be890f?w=800&auto=format&fit=crop"
+                src="/images/BakeryImg.png"
                 alt="Bakery interior"
                 className="w-full h-full object-cover"
               />

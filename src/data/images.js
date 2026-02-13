@@ -1,0 +1,58 @@
+export const galleryItems = [
+  {
+    id: 1,
+    type: "image",
+    src: "/images/BakeryImg.png",
+    alt: "Bakery Interior",
+    title: "Our Warm Atmosphere",
+  },
+  {
+    id: 2,
+    type: "image",
+    src: "/images/Chocolate_Pastries.jpg",
+    alt: "Chocolate Pastries",
+    title: "Decadent Chocolate",
+  },
+  {
+    id: 3,
+    type: "image",
+    src: "/images/Pineapple_pastrie.jpg",
+    alt: "Pineapple Pastry",
+    title: "Tropical Pineapple",
+  },
+  {
+    id: 4,
+    type: "image",
+    src: "/images/Fruit_Tart.jpg",
+    alt: "Fruit Tart",
+    title: "Fresh Fruit Tarts",
+  },
+  {
+    id: 5,
+    type: "image",
+    src: "/images/Blackforest_Pastries.jpg",
+    alt: "Black Forest Pastry",
+    title: "Classic Black Forest",
+  },
+  {
+    id: 6,
+    type: "image",
+    src: "/images/Chocolate_Croissant.jpg",
+    alt: "Chocolate Croissant",
+    title: "Flaky & Sweet",
+  },
+  {
+    id: 7,
+    type: "image",
+    src: "/images/Paneer_Patties.jpg",
+    alt: "Paneer Patties",
+    title: "Savory Delights",
+  },
+  {
+    id: 8,
+    type: "image",
+    src: "/images/Brownie.jpg",
+    alt: "Brownie",
+    title: "Fudgy Goodness",
+  },
+];
