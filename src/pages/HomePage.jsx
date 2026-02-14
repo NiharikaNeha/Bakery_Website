@@ -26,7 +26,7 @@ const HomePage = () => {
           >
             <h2 className="text-4xl font-black text-neutral-900 mb-6">
               Experience the{" "}
-              <span className="italic text-orange-600 font-serif lowercase">
+              <span className="italic text-[#B86B3E] font-serif lowercase">
                 Art
               </span>{" "}
               of Baking
@@ -37,7 +37,7 @@ const HomePage = () => {
             </p>
             <Link
               to="/gallery"
-              className="inline-flex items-center gap-3 bg-orange-600 text-white px-8 py-4 rounded-full font-black uppercase tracking-widest text-sm shadow-xl shadow-orange-200 hover:bg-orange-700 transition-all active:scale-95 group"
+              className="font-bold inline-flex items-center gap-3 bg-[#B86B3E] px-8 py-4 rounded-full text-white uppercase tracking-widest text-sm shadow-xl shadow-[#8C6A54] hover:bg-[#D8A47F] transition-all active:scale-95 group"
             >
               View Full Gallery
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
