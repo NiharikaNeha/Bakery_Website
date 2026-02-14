@@ -20,6 +20,7 @@ const FeaturedProducts = () => {
       image: "/images/Strawberry_Pastries.jpg",
       rating: 4.8,
     },
+    
     {
       id: 3,
       name: "Vanilla Elegance",
