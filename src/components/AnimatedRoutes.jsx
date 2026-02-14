@@ -4,6 +4,7 @@ import { AnimatePresence } from "framer-motion";
 import HomePage from "../pages/HomePage";
 import ProductsPage from "../pages/ProductsPage";
 import GalleryPage from "../pages/GalleryPage";
+import ContactPage from "../pages/ContactPage";
 import PageTransition from "./PageTransition";
 
 const AnimatedRoutes = () => {
@@ -33,6 +34,14 @@ const AnimatedRoutes = () => {
           element={
             <PageTransition>
               <GalleryPage />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/contact"
+          element={
+            <PageTransition>
+              <ContactPage />
             </PageTransition>
           }
         />
