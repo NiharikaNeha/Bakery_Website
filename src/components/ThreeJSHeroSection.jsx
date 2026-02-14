@@ -179,7 +179,7 @@ const ThreeJSHeroSection = () => {
   }, [isLoaded]);
 
   const handleOrderNow = () => {
-    document.getElementById("products")?.scrollIntoView({
+    document.getElementById("contact")?.scrollIntoView({
       behavior: "smooth",
     });
   };

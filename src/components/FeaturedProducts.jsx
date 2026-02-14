@@ -2,7 +2,6 @@ import React from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Star } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-
 const FeaturedProducts = () => {
   const navigate = useNavigate();
 
@@ -10,25 +9,22 @@ const FeaturedProducts = () => {
     {
       id: 1,
       name: "Chocolate Delight Cake",
-      price: "₹45",
-      image:
-        "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&auto=format&fit=crop",
+      price: "₹25",
+      image: "/images/Chocolate_Pastries.jpg",
       rating: 4.9,
     },
     {
       id: 2,
       name: "Strawberry Dream",
-      price: "₹38",
-      image:
-        "https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=400&auto=format&fit=crop",
+      price: "₹25",
+      image: "/images/Strawberry_Pastries.jpg",
       rating: 4.8,
     },
     {
       id: 3,
       name: "Vanilla Elegance",
-      price: "₹42",
-      image:
-        "https://images.unsplash.com/photo-1588195538326-c5b1e5b80e0b?w=400&auto=format&fit=crop",
+      price: "₹25",
+      image: "/images/Whiteforest_Pastries.jpg",
       rating: 5.0,
     },
   ];
@@ -108,8 +104,22 @@ const FeaturedProducts = () => {
                     </span>
                   </div>
                 </div>
-                <div className="text-2xl font-bold text-primary font-heading">
-                  {product.price}
+                <div className="flex items-center justify-between mt-4">
+                  <div className="text-2xl font-bold text-primary font-heading">
+                    {product.price}
+                  </div>
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() =>
+                      document
+                        .getElementById("contact")
+                        ?.scrollIntoView({ behavior: "smooth" })
+                    }
+                    className="bg-primary/10 hover:bg-primary text-primary hover:text-white px-4 py-2 rounded-lg text-sm font-bold transition-all duration-300 border border-primary/20 hover:border-primary"
+                  >
+                    Order Now
+                  </motion.button>
                 </div>
               </div>
             </motion.div>
