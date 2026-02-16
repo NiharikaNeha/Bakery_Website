@@ -1,11 +1,14 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Star, ShoppingCart, Heart } from "lucide-react";
+import { Star, Heart } from "lucide-react";
 
-const ProductCard = ({ product, index }) => {
-  const isVeg =
-    !product.name.toLowerCase().includes("chicken") &&
-    !product.name.toLowerCase().includes("egg");
+// helper to determine veg state
+const checkVeg = (name) =>
+  !name.toLowerCase().includes("chicken") &&
+  !name.toLowerCase().includes("egg");
+
+const ProductCard = React.memo(({ product, index }) => {
+  const isVeg = React.useMemo(() => checkVeg(product.name), [product.name]);
 
   return (
     <motion.div
@@ -68,23 +71,11 @@ const ProductCard = ({ product, index }) => {
             <span className="text-xl font-extrabold text-neutral-900">
               ₹{product.price}
             </span>
-            <span className="text-[10px] text-neutral-400 font-bold uppercase tracking-wider">
-              Select size
-            </span>
           </div>
-
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-orange-600 hover:bg-orange-700 text-white px-5 py-2.5 rounded-xl flex items-center gap-2 shadow-lg shadow-orange-100 transition-all border border-orange-500/20"
-          >
-            <ShoppingCart className="w-3.5 h-3.5" />
-            <span className="font-bold text-sm">Add</span>
-          </motion.button>
         </div>
       </div>
     </motion.div>
   );
-};
+});
 
-export default ProductCard;
+export default ProductCard; 

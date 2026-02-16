@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ShoppingCart, Heart, Star, Plus, Minus } from "lucide-react";
 
-const ProductModal = ({ product, isOpen, onClose }) => {
+const ProductModal = React.memo(({ product, isOpen, onClose }) => {
   const [quantity, setQuantity] = useState(1);
   const [selectedSize, setSelectedSize] = useState(product?.size || "Standard");
 
   if (!isOpen) return null;
 
-  const renderStars = (rating) => {
+  const renderStars = useCallback((rating) => {
     return Array.from({ length: 5 }, (_, i) => (
       <Star
         key={i}
@@ -17,17 +17,18 @@ const ProductModal = ({ product, isOpen, onClose }) => {
         }`}
       />
     ));
-  };
+  }, []);
 
-  const handleQuantityChange = (type) => {
-    if (type === "increase") {
-      setQuantity((prev) => prev + 1);
-    } else {
-      setQuantity((prev) => Math.max(1, prev - 1));
-    }
-  };
+  const handleQuantityChange = useCallback((type) => {
+    setQuantity((prev) =>
+      type === "increase" ? prev + 1 : Math.max(1, prev - 1)
+    );
+  }, []);
 
-  const totalPrice = (product.price * quantity).toFixed(2);
+  const totalPrice = useMemo(
+    () => (product.price * quantity).toFixed(2),
+    [product.price, quantity]
+  );
 
   return (
     <AnimatePresence>
@@ -222,6 +223,6 @@ const ProductModal = ({ product, isOpen, onClose }) => {
       </motion.div>
     </AnimatePresence>
   );
-};
+});
 
-export default ProductModal;
+export default ProductModal; // memoized above

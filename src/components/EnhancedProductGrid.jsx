@@ -12,15 +12,15 @@ const EnhancedProductGrid = ({
   const [selectedProduct, setSelectedProduct] = React.useState(null);
   const [isModalOpen, setIsModalOpen] = React.useState(false);
 
-  const handleProductClick = (product) => {
+  const handleProductClick = React.useCallback((product) => {
     setSelectedProduct(product);
     setIsModalOpen(true);
-  };
+  }, []);
 
-  const handleCloseModal = () => {
+  const handleCloseModal = React.useCallback(() => {
     setIsModalOpen(false);
     setSelectedProduct(null);
-  };
+  }, []);
 
   // Advanced filtering logic
   const filteredProducts = React.useMemo(() => {

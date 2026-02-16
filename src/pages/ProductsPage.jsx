@@ -1,29 +1,30 @@
-import React, { useState } from "react";
-import { motion } from "framer-motion";
+import React, { useState, useCallback } from "react";
 import { products, categories } from "../data/products";
 import CategoryFilter from "../components/CategoryFilter";
 import EnhancedProductGrid from "../components/EnhancedProductGrid";
-import { Sparkles, ShoppingBag, Menu, Leaf, Drumstick } from "lucide-react";
+import { Menu, Leaf, Drumstick } from "lucide-react";
 
 const ProductsPage = () => {
   const [activeCategory, setActiveCategory] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
   const [dietaryFilter, setDietaryFilter] = useState("all");
 
-  const handleCategoryChange = (categoryId) => {
+  const handleCategoryChange = React.useCallback((categoryId) => {
     setActiveCategory(categoryId);
-  };
+  }, []);
 
-  const handleSearchChange = (value) => {
+  const handleSearchChange = React.useCallback((value) => {
     setSearchTerm(value);
-  };
+  }, []);
 
-  const toggleDietaryFilter = () => {
-    const filters = ["all", "veg", "non-veg"];
-    const currentIndex = filters.indexOf(dietaryFilter);
-    const nextIndex = (currentIndex + 1) % filters.length;
-    setDietaryFilter(filters[nextIndex]);
-  };
+  const toggleDietaryFilter = React.useCallback(() => {
+    setDietaryFilter((prev) => {
+      const filters = ["all", "veg", "non-veg"];
+      const currentIndex = filters.indexOf(prev);
+      const nextIndex = (currentIndex + 1) % filters.length;
+      return filters[nextIndex];
+    });
+  }, []);
 
   return (
     <div className="min-h-screen bg-neutral-50/50 pb-12">
@@ -34,7 +35,7 @@ const ProductsPage = () => {
             className="text-2xl md:text-3xl font-black italic text-[#FF6B00] tracking-tighter drop-shadow-sm"
             style={{ fontFamily: '"Milkshake", "cursive", sans-serif' }}
           >
-            Food Fantasy
+            Maa Bakery
           </h1>
 
           <div className="flex items-center gap-2">
