@@ -27,9 +27,9 @@ const AboutSection = () => {
   ];
 
   const stats = [
-    { value: "10+", label: "Years Experience" },
+    { value: "6+", label: "Years Experience" },
     { value: "50K+", label: "Happy Customers" },
-    { value: "100+", label: "Unique Recipes" },
+    { value: "35+", label: "Unique Recipes" },
     { value: "4.9", label: "Average Rating" },
   ];
 
@@ -46,7 +46,7 @@ const AboutSection = () => {
           >
             <h2 className="text-4xl md:text-5xl font-heading font-bold text-text-primary mb-6">
               Crafting Delicious <span className="text-primary">Memories</span>{" "}
-              Since 2014
+              Since 2020
             </h2>
             <p className="text-lg text-text-secondary mb-8 font-body leading-relaxed">
               At Maa Bakery, we believe that every cake, pastry, and bread tells
@@ -113,7 +113,7 @@ const AboutSection = () => {
               }}
               className="absolute -bottom-6 -right-6 bg-accent text-white p-6 rounded-xl shadow-strong"
             >
-              <div className="text-3xl font-bold font-heading">10+</div>
+              <div className="text-3xl font-bold font-heading">6+</div>
               <div className="text-sm font-body">Years of Excellence</div>
             </motion.div>
           </motion.div>
