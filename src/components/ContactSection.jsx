@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Phone, MapPin, Send } from "lucide-react";
+import { Phone, MapPin, Send, MessageCircle } from "lucide-react";
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -18,6 +18,17 @@ const ContactSection = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Construct WhatsApp message
+    const whatsappNumber = "918018306265";
+    const text = encodeURIComponent(
+      `Hello! My name is ${formData.name}.\n\n${formData.message}`,
+    );
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${text}`;
+
+    // Open WhatsApp in a new tab
+    window.open(whatsappUrl, "_blank");
+
     setIsSubmitted(true);
     setTimeout(() => {
       setIsSubmitted(false);
@@ -31,6 +42,12 @@ const ContactSection = () => {
       title: "Phone",
       details: "+91 80183 06265",
       link: "tel:+918018306265",
+    },
+    {
+      icon: MessageCircle,
+      title: "WhatsApp",
+      details: "+91 80183 06265",
+      link: "https://wa.me/918018306265",
     },
     {
       icon: MapPin,
@@ -85,7 +102,7 @@ const ContactSection = () => {
                   className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary bg-background text-text-primary font-body"
                   placeholder="John Doe"
                 />
-              </div>  
+              </div>
 
               <div>
                 <label
