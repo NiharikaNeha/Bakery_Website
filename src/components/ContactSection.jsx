@@ -46,8 +46,8 @@ const ContactSection = () => {
     {
       icon: MessageCircle,
       title: "WhatsApp",
-      details: "+91 80183 06265",
-      link: "https://wa.me/918018306265",
+      details: "+91 82602 61009",
+      link: "https://wa.me/918260261009",
     },
     {
       icon: MapPin,
