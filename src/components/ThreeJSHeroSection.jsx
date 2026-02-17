@@ -212,7 +212,7 @@ const ThreeJSHeroSection = () => {
             >
               <Sparkles className="w-4 h-4 text-accent animate-pulse" />
               <span className="text-sm font-semibold text-primary font-body tracking-wide">
-                Artisan Quality Since 2014
+                Artisan Quality Since 2020
               </span>
             </motion.div>
 

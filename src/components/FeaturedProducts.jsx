@@ -8,14 +8,14 @@ const FeaturedProducts = () => {
   const products = [
     {
       id: 1,
-      name: "Chocolate Delight Cake",
+      name: "Chocolate Pastry",
       price: "₹25",
       image: "/images/Chocolate_Pastries.jpg",
       rating: 4.9,
     },
     {
       id: 2,
-      name: "Strawberry Dream",
+      name: "Strawberry Pastry",
       price: "₹25",
       image: "/images/Strawberry_Pastries.jpg",
       rating: 4.8,
@@ -23,7 +23,7 @@ const FeaturedProducts = () => {
     
     {
       id: 3,
-      name: "Vanilla Elegance",
+      name: "White Forest Pastry",
       price: "₹25",
       image: "/images/Whiteforest_Pastries.jpg",
       rating: 5.0,
