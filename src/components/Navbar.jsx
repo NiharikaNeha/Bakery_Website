@@ -36,19 +36,19 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-16 sm:h-20">
           {/* Logo */}
           <motion.div
-            className="flex-shrink-0 flex items-center gap-2"
+            className="flex-shrink-0 flex items-center gap-2 ml-4"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <Link to="/" className="block flex items-center gap-3">
+            <Link to="/" className="block flex items-center gap-1">
               <img
                 src="/images/Logo.png"
                 alt="Maa Bakery Logo"
-                className="h-10 w-10 sm:h-12 sm:w-12 object-contain"
+                className="h-16 w-16 sm:h-20 sm:w-20 object-contain"
               />
-              <h1 className="text-2xl font-heading font-bold bg-gradient-to-r from-primary to-primary-dark bg-clip-text text-transparent">
+              {/* <h1 className="text-2xl font-heading font-bold bg-gradient-to-r from-primary to-primary-dark bg-clip-text text-transparent">
                 Maa Bakery
-              </h1>
+              </h1> */}
             </Link>
           </motion.div>
 

@@ -202,7 +202,7 @@ const ThreeJSHeroSection = () => {
       <div className="container mx-auto px-6 lg:px-12 z-10 py-16 lg:py-24">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left Side - Text Content */}
-          <div className="text-center lg:text-left space-y-8">
+          <div className="text-center lg:text-left space-y-8 -mt-20 sm:-mt-24 lg:mt-0">
             {/* Premium Badge */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -292,8 +292,8 @@ const ThreeJSHeroSection = () => {
           </div>
 
           {/* Right Side - 3D Cake */}
-          <div className="relative flex items-center justify-center order-first lg:order-last mb-8 lg:mb-0">
-            <div className="relative w-full max-w-[280px] sm:max-w-md lg:max-w-lg h-[250px] sm:h-[400px] lg:h-[600px]">
+          <div className="relative flex items-center justify-center order-first lg:order-last lg:mb-0">
+            <div className="relative w-full max-w-[320px] sm:max-w-xl lg:max-w-2xl h-[450px] sm:h-[500px] lg:h-[700px] -translate-y-12 sm:-translate-y-16 lg:-translate-y-20">
               {/* Subtle Glow Effect */}
               <motion.div
                 animate={{
