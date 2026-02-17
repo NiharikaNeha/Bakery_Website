@@ -31,10 +31,7 @@ const ProductsPage = () => {
       {/* Header / Navbar */}
       <header className="sticky top-0 z-40 bg-white shadow-sm border-b border-neutral-100">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <h1
-            className="text-2xl md:text-3xl font-black italic text-[#FF6B00] tracking-tighter drop-shadow-sm"
-            style={{ fontFamily: '"Milkshake", "cursive", sans-serif' }}
-          >
+          <h1 className="text-2xl md:text-3xl font-black italic text-[#FF6B00] tracking-tighter drop-shadow-sm font-heading">
             Maa Bakery
           </h1>
 

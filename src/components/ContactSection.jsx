@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Send } from "lucide-react";
+import { Phone, MapPin, Send } from "lucide-react";
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
     message: "",
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -22,7 +21,7 @@ const ContactSection = () => {
     setIsSubmitted(true);
     setTimeout(() => {
       setIsSubmitted(false);
-      setFormData({ name: "", email: "", message: "" });
+      setFormData({ name: "", message: "" });
     }, 3000);
   };
 
@@ -32,12 +31,6 @@ const ContactSection = () => {
       title: "Phone",
       details: "+91 80183 06265",
       link: "tel:+918018306265",
-    },
-    {
-      icon: Mail,
-      title: "Email",
-      details: "[EMAIL_ADDRESS]",
-      link: "mailto:hello@sweetbakery.com",
     },
     {
       icon: MapPin,
@@ -92,26 +85,7 @@ const ContactSection = () => {
                   className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary bg-background text-text-primary font-body"
                   placeholder="John Doe"
                 />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-semibold text-text-primary mb-2 font-heading"
-                >
-                  Email Address
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary bg-background text-text-primary font-body"
-                  placeholder="john@example.com"
-                />
-              </div>
+              </div>  
 
               <div>
                 <label
