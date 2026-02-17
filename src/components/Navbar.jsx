@@ -19,7 +19,7 @@ const Navbar = () => {
   const navItems = [
     { name: "Home", href: "/", isRoute: true },
     { name: "Products", href: "/products", isRoute: true },
-    { name: "Gallery", href: "/gallery", isRoute: true }
+    { name: "Gallery", href: "/gallery", isRoute: true },
   ];
 
   return (
@@ -40,7 +40,12 @@ const Navbar = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <Link to="/" className="block flex items-center gap-2">
+            <Link to="/" className="block flex items-center gap-3">
+              <img
+                src="/images/Logo.png"
+                alt="Maa Bakery Logo"
+                className="h-10 w-10 sm:h-12 sm:w-12 object-contain"
+              />
               <h1 className="text-2xl font-heading font-bold bg-gradient-to-r from-primary to-primary-dark bg-clip-text text-transparent">
                 Maa Bakery
               </h1>
